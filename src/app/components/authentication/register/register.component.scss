@@ -1,1 +1,6 @@
 @import "../login/login.component";
+*,
+::after,
+::before {
+  box-sizing: unset;
+}
