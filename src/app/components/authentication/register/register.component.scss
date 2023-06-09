@@ -2,5 +2,8 @@
 *,
 ::after,
 ::before {
-  box-sizing: unset;
+  box-sizing: border-box;
+}
+.tagus-form {
+  max-width: 90% !important;
 }

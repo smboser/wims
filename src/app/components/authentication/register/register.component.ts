@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CustomizerSettingsService } from '../../customizer-settings/customizer-settings.service';
 import {
   FormBuilder,
@@ -8,14 +8,17 @@ import {
   FormControl,
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   hide = true;
+  countries: { id: number; name: string }[] = [];
+  states: any = [];
 
   confirmValidator = (
     control: FormControl<string>
@@ -38,12 +41,20 @@ export class RegisterComponent {
     confirmPassword: ['', [Validators.required, this.confirmValidator]],
     phonePrimary: ['', [Validators.required]],
     phoneSecondary: [''],
+    address1: ['', [Validators.required]],
+    address2: [''],
+    city: ['', [Validators.required]],
+    district: ['', [Validators.required]],
+    state: ['', [Validators.required]],
+    country: ['', [Validators.required]],
+    pincode: ['', [Validators.required]],
   });
 
   constructor(
     private fb: FormBuilder,
     public themeService: CustomizerSettingsService,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private loginService: LoginService
   ) {}
 
   get fname() {
@@ -74,6 +85,34 @@ export class RegisterComponent {
     return this.registrationForm.get('phoneSecondary')!;
   }
 
+  get address1() {
+    return this.registrationForm.get('address1')!;
+  }
+
+  get address2() {
+    return this.registrationForm.get('address2')!;
+  }
+
+  get city() {
+    return this.registrationForm.get('city')!;
+  }
+
+  get district() {
+    return this.registrationForm.get('district')!;
+  }
+
+  get country() {
+    return this.registrationForm.get('country')!;
+  }
+
+  get state() {
+    return this.registrationForm.get('state')!;
+  }
+
+  get pincode() {
+    return this.registrationForm.get('pincode')!;
+  }
+
   toggleTheme() {
     this.themeService.toggleTheme();
   }
@@ -88,6 +127,22 @@ export class RegisterComponent {
 
   toggleRTLEnabledTheme() {
     this.themeService.toggleRTLEnabledTheme();
+  }
+
+  ngOnInit() {
+    this.loginService.getCountries().subscribe((countries) => {
+      this.countries = countries;
+    });
+  }
+
+  handleChangeCountry(event: any) {
+    console.log(this.registrationForm.valid);
+    let slectedCountry = event.value;
+    this.loginService.getStates().subscribe((states) => {
+      this.states = states.filter(
+        (state: any) => state.country_id === slectedCountry
+      );
+    });
   }
 
   register() {

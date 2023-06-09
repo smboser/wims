@@ -1,5 +1,5 @@
 <div
-  class="h-100vh pt-50 pb-50"
+  class="pt-50 pb-50"
   [class.component-dark-theme]="themeService.isDark()"
   [class.card-borderd-theme]="themeService.isCardBorder()"
   [class.card-border-radius]="themeService.isCardBorderRadius()"
@@ -20,161 +20,325 @@
             >
           </p>
         </div>
+
         <form [formGroup]="registrationForm">
-          <div class="bg-white border-radius pt-20 ps-20 pe-20">
-            <div class="tagus-form-group without-icon">
-              <label class="d-block mb-12 fw-semibold gray-color"
-                >First Name <span>*</span></label
-              >
-              <mat-form-field appearance="fill">
-                <mat-label>Enter first name</mat-label>
-                <input matInput type="text" formControlName="fname" required />
-                <mat-error *ngIf="fname?.invalid">
-                  <span *ngIf="fname?.errors?.['required']">
-                    Please enter first name
-                  </span>
-                </mat-error>
-              </mat-form-field>
-            </div>
-            <div class="tagus-form-group without-icon">
-              <label class="d-block mb-12 fw-semibold gray-color"
-                >Last Name <span>*</span></label
-              >
-              <mat-form-field appearance="fill">
-                <mat-label>Enter last name</mat-label>
-                <input matInput type="text" formControlName="lname" required />
-                <mat-error *ngIf="lname?.invalid">
-                  <span *ngIf="lname?.errors?.['required']">
-                    Please enter last name
-                  </span>
-                </mat-error>
-              </mat-form-field>
-            </div>
-            <div class="tagus-form-group without-icon">
-              <label class="d-block mb-12 fw-semibold gray-color"
-                >Email Address <span>*</span></label
-              >
-              <mat-form-field appearance="fill">
-                <mat-label>Enter email address</mat-label>
-                <input matInput type="email" formControlName="email" required />
-                <mat-error *ngIf="email?.invalid">
-                  <span *ngIf="email?.errors?.['required']">
-                    Please enter email
-                  </span>
-                  <span
-                    *ngIf="!email?.errors?.['required'] && email?.errors?.['email']"
+          <div class="bg-white border-radius pt-20 ps-20 pe-20 pb-20">
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="tagus-form-group">
+                  <label class="d-block mb-12 fw-semibold gray-color"
+                    >First Name <span>*</span></label
                   >
-                    Please enter a valid email id
-                  </span>
-                </mat-error>
-              </mat-form-field>
-            </div>
-            <div class="tagus-form-group without-icon">
-              <label class="d-block mb-12 fw-semibold gray-color"
-                >Password <span>*</span></label
-              >
-              <mat-form-field appearance="fill">
-                <mat-label>Enter your password</mat-label>
-                <input
-                  matInput
-                  [type]="hide ? 'password' : 'text'"
-                  formControlName="password"
-                  required
-                />
-                <button
-                  mat-icon-button
-                  matSuffix
-                  (click)="hide = !hide"
-                  [attr.aria-label]="'Hide password'"
-                  [attr.aria-pressed]="hide"
-                >
-                  <mat-icon>{{
-                    hide ? "visibility_off" : "visibility"
-                  }}</mat-icon>
-                </button>
-                <mat-error *ngIf="password?.invalid">
-                  <span *ngIf="password?.errors?.['required']">
-                    Please enter password
-                  </span>
-                </mat-error>
-              </mat-form-field>
-            </div>
-            <div class="tagus-form-group without-icon">
-              <label class="d-block mb-12 fw-semibold gray-color"
-                >Confirm Password <span>*</span></label
-              >
-              <mat-form-field appearance="fill">
-                <mat-label>Enter your password</mat-label>
-                <input
-                  matInput
-                  [type]="hide ? 'password' : 'text'"
-                  formControlName="confirmPassword"
-                  required
-                />
-                <button
-                  mat-icon-button
-                  matSuffix
-                  (click)="hide = !hide"
-                  [attr.aria-label]="'Hide password'"
-                  [attr.aria-pressed]="hide"
-                >
-                  <mat-icon>{{
-                    hide ? "visibility_off" : "visibility"
-                  }}</mat-icon>
-                </button>
-                <mat-error *ngIf="confirmPassword?.invalid">
-                  <span
-                    *ngIf="
-                      registrationForm
-                        .get('confirmPassword')
-                        ?.hasError('required')
-                    "
+                  <mat-form-field appearance="fill">
+                    <i class="ri-user-3-line"></i>
+                    <mat-label>Enter first name</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="fname"
+                      required
+                    />
+                    <mat-error *ngIf="fname?.invalid">
+                      <span *ngIf="fname?.errors?.['required']">
+                        Please enter first name
+                      </span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="tagus-form-group">
+                  <label class="d-block mb-12 fw-semibold gray-color"
+                    >Last Name <span>*</span></label
                   >
-                    Please enter
-                  </span>
-                  <span
-                    *ngIf="
-                      registrationForm
-                        .get('confirmPassword')
-                        ?.hasError('confirm')
-                    "
+                  <mat-form-field appearance="fill">
+                    <i class="ri-user-3-line"></i>
+                    <mat-label>Enter last name</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="lname"
+                      required
+                    />
+                    <mat-error *ngIf="lname?.invalid">
+                      <span *ngIf="lname?.errors?.['required']">
+                        Please enter last name
+                      </span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="tagus-form-group">
+                  <label class="d-block mb-12 fw-semibold gray-color"
+                    >Email Address <span>*</span></label
                   >
-                    Confirm password doesn't match
-                  </span>
-                </mat-error>
-              </mat-form-field>
+                  <mat-form-field appearance="fill">
+                    <i class="ri-mail-line"></i>
+                    <mat-label>Enter email address</mat-label>
+                    <input
+                      matInput
+                      type="email"
+                      formControlName="email"
+                      required
+                    />
+                    <mat-error *ngIf="email?.invalid">
+                      <span *ngIf="email?.errors?.['required']">
+                        Please enter email
+                      </span>
+                      <span
+                        *ngIf="!email?.errors?.['required'] && email?.errors?.['email']"
+                      >
+                        Please enter a valid email id
+                      </span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="tagus-form-group without-icon">
+                  <label class="d-block mb-12 fw-semibold gray-color"
+                    >Password <span>*</span></label
+                  >
+                  <mat-form-field appearance="fill">
+                    <mat-label>Enter your password</mat-label>
+                    <input
+                      matInput
+                      [type]="hide ? 'password' : 'text'"
+                      formControlName="password"
+                      required
+                    />
+                    <button
+                      mat-icon-button
+                      matSuffix
+                      (click)="hide = !hide"
+                      [attr.aria-label]="'Hide password'"
+                      [attr.aria-pressed]="hide"
+                    >
+                      <mat-icon>{{
+                        hide ? "visibility_off" : "visibility"
+                      }}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="password?.invalid">
+                      <span *ngIf="password?.errors?.['required']">
+                        Please enter password
+                      </span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="tagus-form-group without-icon">
+                  <label class="d-block mb-12 fw-semibold gray-color"
+                    >Confirm Password <span>*</span></label
+                  >
+                  <mat-form-field appearance="fill">
+                    <mat-label>Enter your password</mat-label>
+                    <input
+                      matInput
+                      [type]="hide ? 'password' : 'text'"
+                      formControlName="confirmPassword"
+                      required
+                    />
+                    <button
+                      mat-icon-button
+                      matSuffix
+                      (click)="hide = !hide"
+                      [attr.aria-label]="'Hide password'"
+                      [attr.aria-pressed]="hide"
+                    >
+                      <mat-icon>{{
+                        hide ? "visibility_off" : "visibility"
+                      }}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="confirmPassword?.invalid">
+                      <span
+                        *ngIf="
+                          registrationForm
+                            .get('confirmPassword')
+                            ?.hasError('required')
+                        "
+                      >
+                        Please enter
+                      </span>
+                      <span
+                        *ngIf="
+                          registrationForm
+                            .get('confirmPassword')
+                            ?.hasError('confirm')
+                        "
+                      >
+                        Confirm password doesn't match
+                      </span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="tagus-form-group">
+                  <label class="d-block mb-12 fw-semibold gray-color"
+                    >Phone (Primary) <span>*</span></label
+                  >
+                  <mat-form-field appearance="fill">
+                    <i class="ri-phone-line"></i>
+                    <mat-label>Enter phone number</mat-label>
+                    <input matInput formControlName="phonePrimary" required />
+                    <mat-error *ngIf="phonePrimary?.invalid">
+                      <span *ngIf="phonePrimary?.errors?.['required']">
+                        Please enter phone number
+                      </span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="tagus-form-group">
+                  <label class="d-block mb-12 fw-semibold gray-color"
+                    >Phone (Secondary)
+                  </label>
+                  <mat-form-field appearance="fill">
+                    <i class="ri-phone-line"></i>
+                    <mat-label>Enter another phone number</mat-label>
+                    <input matInput formControlName="phoneSecondary" />
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="tagus-form-group">
+                  <label class="d-block mb-12 fw-semibold gray-color"
+                    >Address 1 <span>*</span></label
+                  >
+                  <mat-form-field appearance="fill">
+                    <i class="ri-map-pin-line"></i>
+                    <mat-label>Enter address 1</mat-label>
+                    <input matInput formControlName="address1" required />
+                    <mat-error *ngIf="address1?.invalid">
+                      <span *ngIf="address1?.errors?.['required']">
+                        Please enter address1
+                      </span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="tagus-form-group">
+                  <label class="d-block mb-12 fw-semibold gray-color"
+                    >Address 2
+                  </label>
+                  <mat-form-field appearance="fill">
+                    <i class="ri-map-pin-line"></i>
+                    <mat-label>Enter address 2</mat-label>
+                    <input matInput formControlName="address2" />
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="tagus-form-group without-icon">
+                  <label class="d-block mb-12 fw-semibold gray-color"
+                    >City <span>*</span></label
+                  >
+                  <mat-form-field appearance="fill">
+                    <mat-label>Enter city</mat-label>
+                    <input matInput formControlName="city" required />
+                    <mat-error *ngIf="city?.invalid">
+                      <span *ngIf="city?.errors?.['required']">
+                        Please enter city
+                      </span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="tagus-form-group without-icon">
+                  <label class="d-block mb-12 fw-semibold gray-color"
+                    >District <span>*</span></label
+                  >
+                  <mat-form-field appearance="fill">
+                    <mat-label>Enter district</mat-label>
+                    <input matInput formControlName="phonePrimary" required />
+                    <mat-error *ngIf="district?.invalid">
+                      <span *ngIf="district?.errors?.['required']">
+                        Please enter district
+                      </span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="tagus-form-group without-icon">
+                  <label class="d-block mb-12 fw-semibold gray-color"
+                    >Country <span>*</span></label
+                  >
+                  <mat-form-field appearance="fill">
+                    <mat-label>Select country</mat-label>
+                    <mat-select
+                      (selectionChange)="handleChangeCountry($event)"
+                      formControlName="country"
+                      required
+                    >
+                      <mat-option *ngFor="let c of countries" [value]="c.id">{{
+                        c.name
+                      }}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="country?.invalid">
+                      <span *ngIf="country?.errors?.['required']">
+                        Please select country
+                      </span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="tagus-form-group without-icon">
+                  <label class="d-block mb-12 fw-semibold gray-color"
+                    >State <span>*</span></label
+                  >
+                  <mat-form-field appearance="fill">
+                    <mat-label>Select state</mat-label>
+                    <mat-select formControlName="state" required>
+                      <mat-option *ngFor="let s of states" value="s.id">{{
+                        s.name
+                      }}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="state?.invalid">
+                      <span *ngIf="state?.errors?.['required']">
+                        Please select state
+                      </span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="tagus-form-group without-icon">
+                  <label class="d-block mb-12 fw-semibold gray-color"
+                    >Pincode <span>*</span></label
+                  >
+                  <mat-form-field appearance="fill">
+                    <mat-label>Enter pincode</mat-label>
+                    <input
+                      matInput
+                      formControlName="pincode"
+                      type="number"
+                      required
+                    />
+                    <mat-error *ngIf="pincode?.invalid">
+                      <span *ngIf="pincode?.errors?.['required']">
+                        Please enter pincode
+                      </span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
             </div>
-            <div class="tagus-form-group without-icon">
-              <label class="d-block mb-12 fw-semibold gray-color"
-                >Phone (Primary) <span>*</span></label
-              >
-              <mat-form-field appearance="fill">
-                <mat-label>Enter phone number</mat-label>
-                <input matInput formControlName="phonePrimary" required />
-                <mat-error *ngIf="phonePrimary?.invalid">
-                  <span *ngIf="phonePrimary?.errors?.['required']">
-                    Please enter phone number
-                  </span>
-                </mat-error>
-              </mat-form-field>
-            </div>
-            <div class="tagus-form-group without-icon">
-              <label class="d-block mb-12 fw-semibold gray-color"
-                >Phone (Secondary)
-              </label>
-              <mat-form-field appearance="fill">
-                <mat-label>Enter another phone number</mat-label>
-                <input matInput formControlName="phoneSecondary" />
-              </mat-form-field>
-            </div>
+            <button
+              mat-flat-button
+              class="tagus d-block fw-semibold"
+              (click)="register()"
+              [disabled]="!!registrationForm.invalid"
+            >
+              Register
+            </button>
           </div>
-          <button
-            mat-flat-button
-            class="tagus d-block fw-semibold"
-            (click)="register()"
-          >
-            Register
-          </button>
         </form>
       </div>
     </div>

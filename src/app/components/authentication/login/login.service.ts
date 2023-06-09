@@ -37,4 +37,13 @@ export class LoginService {
         })
       );
   }
+
+  getCountries(): Observable<any> {
+    return this.http.get('assets/countries.json');
+  }
+
+  getStates(): Observable<any> {
+    // Fetch country.json
+    return this.http.get('assets/states.json');
+  }
 }
