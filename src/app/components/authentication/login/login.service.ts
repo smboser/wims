@@ -38,6 +38,15 @@ export class LoginService {
       );
   }
 
+  register(registerData: User): Observable<any> {
+    return this.http
+      .post<any>(
+        `${environment.apiServer}${environment.apiUrl}/signup`,
+        registerData
+      )
+      .pipe(tap((data) => console.log(data)));
+  }
+
   getCountries(): Observable<any> {
     return this.http.get('assets/countries.json');
   }

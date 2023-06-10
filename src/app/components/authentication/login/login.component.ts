@@ -81,6 +81,7 @@ export class LoginComponent {
         } else {
           this.toast.error('Wrong username / password');
         }
+        this.isSubmitting = false;
       }
     );
   }

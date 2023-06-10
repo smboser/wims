@@ -116,19 +116,22 @@
             class="d-flex info align-items-center justify-content-space-between"
           >
             <mat-checkbox class="gray-color">Remember me</mat-checkbox>
-            <a
-              routerLink="/authentication/forgot-password"
-              class="d-inline-block main-color fw-medium"
+            <a routerLink="/" class="d-inline-block main-color fw-medium"
               >Forgot your password?</a
             >
           </div>
           <button
-            mat-flat-button
+            mat-raised-button
             class="tagus d-block fw-semibold"
             (click)="login()"
-            [disabled]="!!loginForm.invalid"
+            [disabled]="!!loginForm.invalid || !!isSubmitting"
           >
-            Log In
+            <span *ngIf="!isSubmitting">Log In</span>
+            <mat-spinner
+              *ngIf="!!isSubmitting"
+              diameter="25"
+              color="primary"
+            ></mat-spinner>
           </button>
         </form>
       </div>

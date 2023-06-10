@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { LoginService } from '../login/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -19,6 +20,7 @@ export class RegisterComponent implements OnInit {
   hide = true;
   countries: { id: number; name: string }[] = [];
   states: any = [];
+  isSubmitting = false;
 
   confirmValidator = (
     control: FormControl<string>
@@ -54,7 +56,8 @@ export class RegisterComponent implements OnInit {
     private fb: FormBuilder,
     public themeService: CustomizerSettingsService,
     private toast: ToastrService,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private router: Router
   ) {}
 
   get fname() {
@@ -136,20 +139,72 @@ export class RegisterComponent implements OnInit {
   }
 
   handleChangeCountry(event: any) {
-    console.log(this.registrationForm.valid);
     let slectedCountry = event.value;
     this.loginService.getStates().subscribe((states) => {
       this.states = states.filter(
         (state: any) => state.country_id === slectedCountry
       );
     });
+    // For testing purpose
+    // this.checkInvalid();
   }
 
   register() {
-    console.log(this.registrationForm.value);
+    this.isSubmitting = true;
+
     if (this.registrationForm.valid) {
-      // TODO: submit registration
-      console.log('TODO: call registration service once api is ready');
+      let registerData = {
+        ...this.registrationForm.value,
+        state: parseInt(this.state.value),
+        country: parseInt(this.country.value),
+        phone_primary: this.phonePrimary.value,
+        phone_secondary: this.phoneSecondary.value,
+        user_type: 'stockist',
+      };
+      delete registerData.confirmPassword; // Removing confirm password
+      delete registerData.phonePrimary;
+      delete registerData.phoneSecondary;
+
+      this.loginService.register(registerData).subscribe(
+        (res) => {
+          console.log('res', res);
+          if (res && res.status && res.status === 'success') {
+            this.toast.success('User registered successfully.');
+            this.router.navigateByUrl('authentication/login');
+          } else {
+            this.toast.error(
+              `Error!!! Please try later - ${JSON.stringify(res.message)}`
+            );
+          }
+          this.isSubmitting = false;
+        },
+        (err) => {
+          if (err && err.error && err.error.message) {
+            console.log(err.error.message);
+            this.toast.error(err.error.message);
+          } else {
+            this.toast.error('Error!!! Please try later');
+          }
+          this.isSubmitting = false;
+        }
+      );
+    }
+  }
+
+  checkInvalid() {
+    if (this.registrationForm.invalid) {
+      // The entire form is invalid
+      console.log('Form is invalid.');
+      // Loop through the form controls
+      Object.keys(this.registrationForm.controls).forEach((controlName) => {
+        let control = controlName;
+        if (this.registrationForm.get(control)?.invalid) {
+          console.log(`Invalid control: ${controlName}`);
+        }
+      });
+    } else {
+      // Form is valid, perform submit logic
+      console.log('Form is valid');
     }
   }
 }
