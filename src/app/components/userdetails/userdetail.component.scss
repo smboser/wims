@@ -1,0 +1,9 @@
+@import "../authentication/login/login.component";
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+.tagus-form {
+  max-width: 90% !important;
+}
